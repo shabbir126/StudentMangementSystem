@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Home</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
+</head>
+<body>
+	<div class="container">
+	 <form th:action="@{/register}" method="post" th:object="${student}" enctype="multipart/form-data">
+        <div class="row ">
+            <div class="col-sm-7">
+
+                <input type="hidden" name="id" th:field="*{id}">
+                <div class="form-group">
+                    <label for="name">First Name</label>
+                    <input type="text" class="form-control" required th:field="*{firstName}" name="firstName" id="firstName"
+                           placeholder="Enter First Name">
+                           
+                    <label for="name">Middle Name</label>
+                    <input type="text" class="form-control" required th:field="*{middleName}" name="middleName" id="middleName"
+                           placeholder="Enter Middle Name">
+                    <label for="name">Last Name</label>       
+	               <input type="text" class="form-control" required th:field="*{lastName}" name="lastName" id="lastName"
+                           placeholder="Enter Last Name">
+                   <label for="name">email</label>
+                    <input type="email" class="form-control" required th:field="*{email}" name="email" id="email"
+                           placeholder="Enter email"> 
+	                <label for="name">RollNo: </label>       
+	               <input type="number" class="form-control" required th:field="*{rollNo}" name="rollNo" id="rollNo"
+                           placeholder="Enter RollNo">
+	               
+	                <label for="name">DOB: </label>       
+	               <input type="date" class="form-control" required th:field="*{DOB}" name="DOB" id="DOB"
+                           placeholder="Enter DOB">
+                    <label for="name">Phone: </label>       
+	               <input type="number" class="form-control" required th:field="*{phoneNo}" name="phoneNo" id="phoneNo"
+                           placeholder="Enter Phone">
+                     <label>Gender:</label>
+          <input type="radio" class="form-control" th:field="*{gender}" name="gender" value="Male" />Male
+          <input type="radio" class="form-control" th:field="*{gender}" name="gender" value="Female" />Female<br/>
+         
+	
+	<div class="col-sm-5">
+                <p>Student Image</p>
+                <div class="custom-file">
+                    <input type="file"  class="custom-file-input" name="studentImage" accept="image/jpeg, image/png, image/jpg"  id="studentImage"/>
+                    <label class="custom-file-label" for="studentImage">Choose file</label>
+                </div>
+                <div class="form-group">
+                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/studentImages/' + student.image}}" style="margin-top: 20px" alt=" ">
+                </div>
+                <input type="hidden" name="imgName" th:value="${student.image}">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
+	</div>
+	</div></form></div>
+	
+	    
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>	
+	<script>
+    function readURL(input){
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#imgPreview').attr('src', e.target.result).width(100).height(100);
+            }
+            reader.readAsDataURL(input.files[0])
+        }
+    }
+    $('#studentImage').change(function(){
+        readURL(this);
+    });
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+</body>
+</html>
